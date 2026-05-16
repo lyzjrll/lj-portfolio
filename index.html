@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LJ Talaña — Portfolio</title>
+  <meta name="description" content="Portfolio of Lyza Jerell S. Talaña (LJ) — Software & Web Developer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --ink: #1a1714;
+      --muted: #6b6560;
+      --accent: #c96a3a;
+      --accent-light: #f0dfd3;
+      --card: #ffffff;
+      --border: #e3ddd6;
+      --radius: 14px;
+      --max: 860px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; font-size: 1rem; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    .skip-link { position: absolute; top: -100px; left: 1rem; background: var(--accent); color: #fff; padding: .5rem 1rem; border-radius: 6px; font-weight: 600; z-index: 9999; transition: top .2s; }
+    .skip-link:focus { top: 1rem; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(247,244,239,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: var(--max); margin: 0 auto; padding: .9rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--ink); }
+    .nav-links { display: flex; gap: 1.8rem; }
+    .nav-links a { font-size: .875rem; font-weight: 500; color: var(--muted); transition: color .2s; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--accent); outline: none; }
+    .nav-links a:focus-visible { outline: 2px solid var(--accent); border-radius: 3px; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 5rem 0; }
+    #hero { padding: 6rem 0 5rem; position: relative; overflow: hidden; }
+    .hero-deco { position: absolute; top: -80px; right: -120px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%); pointer-events: none; }
+    .hero-tag { display: inline-block; background: var(--accent-light); color: var(--accent); font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; padding: .3rem .8rem; border-radius: 100px; margin-bottom: 1.2rem; }
+    .hero-name { font-family: 'DM Serif Display', serif; font-size: clamp(2.6rem, 7vw, 4.2rem); line-height: 1.1; color: var(--ink); margin-bottom: .6rem; }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-sub { font-size: 1.1rem; color: var(--muted); max-width: 520px; margin-bottom: 2rem; }
+    .hero-cta { display: inline-flex; align-items: center; gap: .5rem; background: var(--accent); color: #fff; padding: .75rem 1.6rem; border-radius: 100px; font-weight: 600; font-size: .95rem; transition: background .2s, transform .15s; }
+    .hero-cta:hover { background: #b05a2e; transform: translateY(-2px); }
+    .hero-cta:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .section-label { font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: .5rem; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.2; margin-bottom: 2.5rem; }
+    #about { background: var(--card); border-radius: var(--radius); margin: 0 1rem; padding: 4rem 3rem; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; text-align: justify; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-facts { display: flex; flex-direction: column; gap: 1rem; }
+    .fact-item { border-left: 3px solid var(--accent-light); padding-left: 1rem; }
+    .fact-label { font-size: .75rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; }
+    .fact-value { font-size: .95rem; color: var(--ink); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+    .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: .5rem; transition: box-shadow .2s, transform .2s; }
+    .skill-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.07); transform: translateY(-3px); }
+    .skill-icon { width: 40px; height: 40px; margin-bottom: .25rem; flex-shrink: 0; }
+    .skill-name { font-weight: 600; font-size: .95rem; }
+    .skill-level { font-size: .78rem; color: var(--muted); }
+    .skill-bar { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; }
+    .skill-fill { height: 100%; background: var(--accent); border-radius: 99px; }
+    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 2.2rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; transition: box-shadow .2s; }
+    .project-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.08); }
+    .project-badge { background: var(--accent-light); color: var(--accent); font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .25rem .7rem; border-radius: 100px; white-space: nowrap; }
+    .project-title { font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: .5rem; }
+    .project-desc { color: var(--muted); font-size: .95rem; margin-bottom: 1rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .tag { background: var(--bg); border: 1px solid var(--border); border-radius: 100px; padding: .2rem .7rem; font-size: .78rem; color: var(--muted); }
+    .coming-soon-note { font-size: .8rem; color: var(--muted); font-style: italic; margin-top: .75rem; }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item { display: grid; grid-template-columns: 120px 1fr; gap: 1.5rem; padding-bottom: 2.5rem; position: relative; }
+    .timeline-item:not(:last-child)::after { content: ''; position: absolute; left: 135px; top: 10px; bottom: 0; width: 1px; background: var(--border); }
+    .timeline-date { font-size: .8rem; color: var(--muted); padding-top: .2rem; text-align: right; }
+    .timeline-dot { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; position: absolute; left: 128px; top: 6px; flex-shrink: 0; }
+    .timeline-body { padding-left: 1.2rem; }
+    .timeline-role { font-weight: 600; font-size: 1rem; }
+    .timeline-org { color: var(--accent); font-size: .9rem; margin-bottom: .4rem; }
+    .timeline-desc { color: var(--muted); font-size: .9rem; }
+    #contact { background: var(--ink); border-radius: var(--radius); margin: 0 1rem 4rem; padding: 4rem 3rem; }
+    #contact .section-label { color: var(--accent-light); }
+    #contact .section-title { color: #fff; }
+    #contact p { color: rgba(255,255,255,.6); max-width: 460px; margin-bottom: 2rem; }
+    footer { text-align: center; padding: 2rem 1.5rem; font-size: .8rem; color: var(--muted); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp .65s ease both; }
+    .delay-1 { animation-delay: .1s; }
+    .delay-2 { animation-delay: .22s; }
+    .delay-3 { animation-delay: .34s; }
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      #about, #contact { margin: 0 .5rem; padding: 2.5rem 1.5rem; }
+      .project-card { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 80px 1fr; gap: 1rem; }
+      .timeline-item::after { left: 91px; }
+      .timeline-dot { left: 84px; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <span class="nav-logo">LJST<em style="font-style:italic;color:var(--accent);">.</em></span>
+      <ul class="nav-links" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+```
+<section id="hero" aria-labelledby="hero-heading">
+  <div class="container">
+    <div class="hero-deco" aria-hidden="true"></div>
+    <p class="hero-tag fade-up">Portfolio</p>
+    <h1 class="hero-name fade-up delay-1" id="hero-heading">
+      Hi, I'm <em>Lyza Jerell</em><br />Talaña.
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      I turn coffee and curiosity into working interfaces.<br>(Debugging is just part of the recipe.)
+    </p>
+    <a href="#projects" class="hero-cta fade-up delay-3">
+      See my work
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<section id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <p class="section-label">About me</p>
+    <h2 class="section-title" id="about-heading">A little bit about LJ</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm Lyza Jerell S. Talaña (LJ), a BS Information Technology student at New Era University
+          with a passion for front-end development and database management. I enjoy solving
+          complex problems through clean, thoughtful interfaces, and I'm always eager to explore
+          what's next in tech.
+        </p>
+        <p>
+          My experience spans SharePoint development, Python, and mobile app building. I've been working part time,
+          and has recently finished my 500-hour internship at ColCap Servicing Pty Ltd - Philippine Branch Office.
+          I mainly work on SharePoint-related tasks, which explains my proficiency in the said platform.
+          Aside from that, I've built several web games along the way with the help of AI tools.
+        </p>
+      </div>
+      <div class="about-facts" role="list" aria-label="Quick facts">
+        <div class="fact-item" role="listitem">
+          <p class="fact-label">Degree</p>
+          <p class="fact-value">BS Information Technology — New Era University</p>
+        </div>
+        <div class="fact-item" role="listitem">
+          <p class="fact-label">Strongest area</p>
+          <p class="fact-value">SharePoint &amp; Frontend</p>
+        </div>
+        <div class="fact-item" role="listitem">
+          <p class="fact-label">Currently</p>
+          <p class="fact-value">Open to opportunities</p>
+        </div>
+        <div class="fact-item" role="listitem">
+          <p class="fact-label">Location</p>
+          <p class="fact-value">Pasig City, Philippines 🇵🇭</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" aria-labelledby="skills-heading">
+  <div class="container">
+    <p class="section-label">What I work with</p>
+    <h2 class="section-title" id="skills-heading">Skills &amp; Tech Stack</h2>
+    <ul class="skills-grid" role="list">
+
+      <!-- SharePoint -->
+      <li class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="24" height="24" rx="4" fill="#0078D4"/>
+          <circle cx="9.5" cy="9" r="3.5" fill="white"/>
+          <circle cx="15" cy="7" r="2.5" fill="white" opacity="0.85"/>
+          <path d="M3 18c0-2.21 2.91-4 6.5-4s6.5 1.79 6.5 4" fill="white"/>
+          <path d="M12 16.5c0-1.38 1.57-2.5 3.5-2.5s3.5 1.12 3.5 2.5" fill="white" opacity="0.7"/>
+        </svg>
+        <span class="skill-name">SharePoint</span>
+        <span class="skill-level">Proficient</span>
+        <div class="skill-bar" role="presentation"><div class="skill-fill" style="width:72%"></div></div>
+      </li>
+
+      <!-- Python -->
+      <li class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.898S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.031v-2.867s-.109-3.402 3.35-3.402h5.762s3.24.052 3.24-3.13V3.13S18.271 0 11.914 0zm-3.2 1.812a1.044 1.044 0 1 1 0 2.09 1.044 1.044 0 0 1 0-2.09z" fill="#3776AB"/>
+          <path d="M12.086 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752H12v-.826h8.123S24 18.211 24 12.031c0-6.18-3.403-5.96-3.403-5.96h-2.031v2.867s.109 3.402-3.35 3.402H9.454s-3.24-.052-3.24 3.13V20.87S5.729 24 12.086 24zm3.2-1.812a1.044 1.044 0 1 1 0-2.09 1.044 1.044 0 0 1 0 2.09z" fill="#FFD43B"/>
+        </svg>
+        <span class="skill-name">Python</span>
+        <span class="skill-level">Intermediate</span>
+        <div class="skill-bar" role="presentation"><div class="skill-fill" style="width:60%"></div></div>
+      </li>
+
+      <!-- HTML & CSS -->
+      <li class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" fill="#E34F26"/>
+        </svg>
+        <span class="skill-name">HTML &amp; CSS</span>
+        <span class="skill-level">Intermediate</span>
+        <div class="skill-bar" role="presentation"><div class="skill-fill" style="width:60%"></div></div>
+      </li>
+
+      <!-- JavaScript -->
+      <li class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="24" height="24" fill="#F7DF1E"/>
+          <path d="M6.235 19.318c.464.853 1.363 1.476 2.495 1.476 1.048 0 1.72-.524 1.72-1.247 0-.868-.688-1.174-1.843-1.68l-.633-.27c-1.826-.778-3.04-1.754-3.04-3.815 0-1.898 1.446-3.344 3.706-3.344 1.609 0 2.765.558 3.597 2.024l-1.969 1.264c-.434-.778-.902-1.084-1.628-1.084-.742 0-1.211.47-1.211 1.084 0 .759.47 1.065 1.558 1.534l.633.271c2.15.921 3.365 1.86 3.365 3.97 0 2.274-1.787 3.528-4.188 3.528-2.348 0-3.867-1.12-4.609-2.584l2.047-1.127zm9.773.307c.542.96 1.034 1.772 2.202 1.772.887 0 1.484-.362 1.484-1.77v-9.55h2.512v9.578c0 2.918-1.71 4.241-4.205 4.241-2.253 0-3.561-1.168-4.23-2.573l2.237-1.698z" fill="#1a1a1a"/>
+        </svg>
+        <span class="skill-name">JavaScript</span>
+        <span class="skill-level">Intermediate</span>
+        <div class="skill-bar" role="presentation"><div class="skill-fill" style="width:60%"></div></div>
+      </li>
+
+      <!-- Kotlin -->
+      <li class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M24 24H0V0h24L12 12z" fill="url(#kotlin-grad)"/>
+          <defs>
+            <linearGradient id="kotlin-grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E44857"/>
+              <stop offset="50%" stop-color="#C711E1"/>
+              <stop offset="100%" stop-color="#7F52FF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="skill-name">Kotlin</span>
+        <span class="skill-level">Intermediate</span>
+        <div class="skill-bar" role="presentation"><div class="skill-fill" style="width:55%"></div></div>
+      </li>
+
+      <!-- Java -->
+      <li class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627M9.734 23.924c4.322.277 10.959-.153 11.116-2.19 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.631" fill="#007396"/>
+        </svg>
+        <span class="skill-name">Java</span>
+        <span class="skill-level">Intermediate</span>
+        <div class="skill-bar" role="presentation"><div class="skill-fill" style="width:50%"></div></div>
+      </li>
+
+      <!-- IBM DB2 -->
+      <li class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M0 7.174v1.526h1.973c-.2.313-.3.67-.3 1.048 0 .41.12.79.32 1.115H0v1.526h2.54c.63.81 1.6 1.333 2.69 1.333.48 0 .93-.1 1.34-.283v1.64H0v1.526h8.09v-2.97c.27-.59.42-1.24.42-1.923 0-.45-.06-.886-.17-1.302H8.09v-3.236H0zm13.91 0v1.526h1.97c-.2.313-.3.67-.3 1.048 0 .41.12.79.32 1.115h-2.02v1.526h2.55c.63.81 1.6 1.333 2.69 1.333.48 0 .93-.1 1.34-.283v1.64h-6.57v1.526H22v-2.97c.27-.59.42-1.24.42-1.923 0-.45-.06-.886-.17-1.302H22V7.174h-8.09zM5.23 9.174c.97 0 1.76.787 1.76 1.757s-.79 1.757-1.76 1.757c-.97 0-1.76-.787-1.76-1.757s.79-1.757 1.76-1.757zm13.91 0c.97 0 1.76.787 1.76 1.757s-.79 1.757-1.76 1.757c-.97 0-1.76-.787-1.76-1.757s.79-1.757 1.76-1.757z" fill="#052FAD"/>
+        </svg>
+        <span class="skill-name">IBM DB2 Cloud</span>
+        <span class="skill-level">Intermediate</span>
+        <div class="skill-bar" role="presentation"><div class="skill-fill" style="width:55%"></div></div>
+      </li>
+
+      <!-- Figma -->
+      <li class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.02s-1.354-3.02-3.019-3.02h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.02s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 9.98c-1.665 0-3.019 1.354-3.019 3.019s1.354 3.019 3.019 3.019h3.117V9.98H8.148zm4.587 13.04c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49 4.49 2.014 4.49 4.49-2.014 4.49-4.49 4.49zm0-7.51c-1.665 0-3.019 1.355-3.019 3.02s1.354 3.02 3.019 3.02 3.019-1.355 3.019-3.02-1.354-3.02-3.019-3.02zm6.721-6.53h-.001c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.001c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm0-7.51c-1.665 0-3.019 1.355-3.019 3.02s1.354 3.02 3.019 3.02h.001c1.665 0 3.019-1.355 3.019-3.02s-1.354-3.02-3.02-3.02z" fill="#F24E1E"/>
+        </svg>
+        <span class="skill-name">Figma</span>
+        <span class="skill-level">Intermediate</span>
+        <div class="skill-bar" role="presentation"><div class="skill-fill" style="width:55%"></div></div>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<section id="projects" aria-labelledby="projects-heading">
+  <div class="container">
+    <p class="section-label">What I've built</p>
+    <h2 class="section-title" id="projects-heading">Projects</h2>
+    <div class="project-card" role="article">
+      <div>
+        <h3 class="project-title">Snap-IT-Out</h3>
+        <p class="project-desc">
+          A mobile photobooth app for Android — my capstone project. Snap-IT-Out lets users
+          capture, customize, and share photobooth-style photos directly from their phone.
+        </p>
+        <ul class="project-tags" aria-label="Technologies used">
+          <li class="tag">Android</li>
+          <li class="tag">Mobile App</li>
+          <li class="tag">Capstone</li>
+        </ul>
+        <p class="coming-soon-note">🔗 Project link coming soon</p>
+      </div>
+      <span class="project-badge">Capstone</span>
+    </div>
+
+    <div class="project-card" role="article" style="margin-top:1.2rem;">
+      <div>
+        <h3 class="project-title">HR Manila CORE</h3>
+        <p style="font-size:.8rem;color:var(--accent);font-weight:600;margin-bottom:.6rem;">SharePoint Intranet Site — ColCap Servicing Pty Ltd, Philippine Branch</p>
+        <p class="project-desc">
+          A self-serve SharePoint intranet site built for employees to access company policies, guidelines,
+          and announcements in one place. The site includes 5 automated workflows covering loan applications,
+          document requests, payroll disputes, payroll deduction authorizations, and HR queries. Employees
+          submit a form and receive automated email notifications upon submission, with simultaneous alerts sent to HR.
+        </p>
+        <p class="project-desc">
+          Currently in development: a leave request system with sequential manager approvals (team lead then
+          manager), automated email notifications at each stage, and a live SharePoint calendar displaying all
+          leave requests regardless of status.
+        </p>
+        <ul class="project-tags" aria-label="Technologies used">
+          <li class="tag">SharePoint</li>
+          <li class="tag">Power Automate</li>
+          <li class="tag">Workflow Automation</li>
+          <li class="tag">Intranet</li>
+        </ul>
+        <p class="coming-soon-note">🔒 Live site not publicly accessible — contains confidential company information.</p>
+      </div>
+      <span class="project-badge">Work</span>
+    </div>
+
+  </div>
+</section>
+
+<section id="experience" aria-labelledby="experience-heading">
+  <div class="container">
+    <p class="section-label">Where I've worked</p>
+    <h2 class="section-title" id="experience-heading">Experience</h2>
+    <ol class="timeline" aria-label="Work experience">
+      <li class="timeline-item">
+        <time class="timeline-date" datetime="2023">Recent</time>
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-body">
+          <p class="timeline-role">Part-time &amp; Internship</p>
+          <p class="timeline-org">ColCap Servicing Pty Ltd — Philippine Branch Office</p>
+          <p class="timeline-desc">
+            Handled all SharePoint-related tasks — building, maintaining, and organizing
+            SharePoint sites and solutions to support team operations.
+          </p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="certifications" aria-labelledby="certs-heading">
+  <div class="container">
+    <p class="section-label">Credentials</p>
+    <h2 class="section-title" id="certs-heading">Certifications</h2>
+    <ul class="skills-grid" role="list" aria-label="Certifications">
+      <li class="skill-card">
+        <span class="skill-name" style="font-size:.9rem;">Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate</span>
+        <span class="skill-level">Oracle</span>
+        <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=5E621C5B87CB777530715469E5AD7CD7DD22D8E97731E4DADD5924B7B4542F5B" target="_blank" rel="noopener noreferrer" style="font-size:.8rem;color:var(--accent);margin-top:.25rem;">View Certificate ↗</a>
+      </li>
+      <li class="skill-card">
+        <span class="skill-name" style="font-size:.9rem;">Oracle Cloud Data Management 2023 Certified Foundations Associate</span>
+        <span class="skill-level">Oracle</span>
+        <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=67D9723D78376F0D49E1F2AF55B5CCC9637BA758F3107E976AFA468B7BDC8F39" target="_blank" rel="noopener noreferrer" style="font-size:.8rem;color:var(--accent);margin-top:.25rem;">View Certificate ↗</a>
+      </li>
+      <li class="skill-card">
+        <span class="skill-name" style="font-size:.9rem;">Oracle Cloud Infrastructure 2023 Certified Foundations Associate</span>
+        <span class="skill-level">Oracle</span>
+        <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=0BD4D05187E9AC571223E86F87577D0F5CB56932368317107AC9C839E210BE2C" target="_blank" rel="noopener noreferrer" style="font-size:.8rem;color:var(--accent);margin-top:.25rem;">View Certificate ↗</a>
+      </li>
+      <li class="skill-card">
+        <span class="skill-name" style="font-size:.9rem;">SQL and Relational Databases 101</span>
+        <span class="skill-level">Cognitive Class (IBM)</span>
+        <a href="https://courses.cognitiveclass.ai/certificates/4d76da7856834392887d626cde19dff6" target="_blank" rel="noopener noreferrer" style="font-size:.8rem;color:var(--accent);margin-top:.25rem;">View Certificate ↗</a>
+      </li>
+      <li class="skill-card">
+        <span class="skill-name" style="font-size:.9rem;">NoSQL and DBaaS 101</span>
+        <span class="skill-level">Cognitive Class (IBM)</span>
+        <a href="https://courses.cognitiveclass.ai/certificates/60540cd6a23e45a1b28fbc2d027fd887" target="_blank" rel="noopener noreferrer" style="font-size:.8rem;color:var(--accent);margin-top:.25rem;">View Certificate ↗</a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <p class="section-label">Get in touch</p>
+    <h2 class="section-title" id="contact-heading">Let's connect</h2>
+    <p>Whether you have an opportunity, a question, or just want to say hi — feel free to reach out.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:.5rem;">
+      <a href="mailto:lyzaj.talana@gmail.com" class="hero-cta" style="background:var(--accent);">
+        📧 lyzaj.talana@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/lyza-jerell-talana-93b7122a4" target="_blank" rel="noopener noreferrer" class="hero-cta" style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);">
+        💼 LinkedIn ↗
+      </a>
+    </div>
+  </div>
+</section>
+```
+
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Lyza Jerell S. Talaña · Built with care</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
